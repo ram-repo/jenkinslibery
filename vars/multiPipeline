@@ -1,6 +1,6 @@
-import utilities.GithubMultibranch
+import mutibranch.MultibranchPipelineJobBuilder
 
-def multiPipeline = new GithubMultibranch(
+def multiPipeline = new MultibranchPipelineJobBuilder(
     String projectView
     String repoName
 ).build(this)
