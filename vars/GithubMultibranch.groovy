@@ -1,3 +1,4 @@
+package mutibranch
 import com.cloudbees.plugins.credentials.common.StandardUsernamePasswordCredentials
 import com.cloudbees.plugins.credentials.CredentialsProvider
 import hudson.util.Secret
