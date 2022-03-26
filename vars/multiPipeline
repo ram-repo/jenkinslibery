@@ -1,6 +1,0 @@
-import mutibranch.MultibranchPipelineJobBuilder
-
-def multiPipeline = new MultibranchPipelineJobBuilder(
-    String projectView
-    String repoName
-).build(this)
