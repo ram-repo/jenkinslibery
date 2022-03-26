@@ -1,4 +1,6 @@
-import utilities.GithubMultibranch
+@Libery('jenkinslib@Development')
+
+import com.abc.*;
 
 
 
@@ -14,7 +16,8 @@ stages{
     stage('New MutiBranch pipline'){
         steps{
             script{
-                GithubMultibranch.GithubMultibranch("$params.projectsview", "$params.repoName").build(this)
+               def multiPipeline = new GithubMultibranch("$params.projectsview", "$params.repoName").build(this)
+                // GithubMultibranch.GithubMultibranch("$params.projectsview", "$params.repoName").build(this)
                 }
                }
             }
