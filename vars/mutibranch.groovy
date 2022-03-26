@@ -12,7 +12,7 @@ pipeline {
         stage('New MutiBranch pipline'){
             steps{
                 script{
-                dsl.createNewJenkinsJobWithMultiBranch("$params.projectsview", "$params.repoName")
+                multiPipeline("$params.projectsview", "$params.repoName")
                 }
             }
         }
