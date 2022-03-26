@@ -13,8 +13,9 @@ pipeline {
             steps{
                 definition {
                     cps {
-                        script(dsl1("$params.projectsview", "$params.repoName"))
-                        sandbox()
+                        script{
+                            dsl1("$params.projectsview", "$params.repoName"))
+                            }
                         }
                     }
                 }
