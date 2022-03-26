@@ -1,3 +1,5 @@
+@Library('jenkinslib')_
+
 import utilities.GithubMultibranch
 
 def multiPipeline = new GithubMultibranch(
