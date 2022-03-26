@@ -1,3 +1,7 @@
+@Library('jenkinslib')_
+
+import utilities.GithubMultibranch
+
 def call() {
 
 properties([
@@ -12,10 +16,10 @@ pipeline {
         stage('New MutiBranch pipline'){
             steps{
                 script{
-                multiPipeline.multiPipeline("$params.projectsview", "$params.repoName")
+                    def multiPipeline = new GithubMultibranch("$params.projectsview", "$params.repoName").build(this)
+                    }
                 }
             }
         }
     }
-}
 }
