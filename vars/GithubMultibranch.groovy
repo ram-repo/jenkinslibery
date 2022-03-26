@@ -54,11 +54,3 @@ class MultibranchPipelineJobBuilder {
     }
 
 }
-
-
-import utilities.GithubMultibranch
-
-def multiPipeline = new GithubMultibranch(
-    String projectView
-    String repoName
-).build(this)
