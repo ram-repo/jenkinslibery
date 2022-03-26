@@ -1,5 +1,3 @@
-@Libery('jenkinslib@Development')
-
 import com.abc.*;
 
 
