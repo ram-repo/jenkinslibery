@@ -14,7 +14,7 @@ pipeline {
                 definition {
                     cps {
                         script{
-                            dsl1("$params.projectsview", "$params.repoName"))
+                            dsl1("$params.projectsview", "$params.repoName")
                             }
                         }
                     }
