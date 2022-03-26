@@ -11,11 +11,14 @@ pipeline {
     stages{
         stage('New MutiBranch pipline'){
             steps{
-                script{
-                dsl1.createNewJenkinsJobWithMultiBranch("$params.projectsview", "$params.repoName")
+                definition {
+                    cps {
+                        script(dsl1("$params.projectsview", "$params.repoName"))
+                        sandbox()
+                        }
+                    }
                 }
             }
         }
     }
-}
 }
