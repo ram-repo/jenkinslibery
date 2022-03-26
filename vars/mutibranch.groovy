@@ -12,7 +12,7 @@ pipeline {
         stage('New MutiBranch pipline'){
             steps{
                 script{
-                multiPipeline("$params.projectsview", "$params.repoName")
+                GithubMultibranch.multiPipeline("$params.projectsview", "$params.repoName")
                 }
             }
         }
