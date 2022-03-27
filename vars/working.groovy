@@ -14,7 +14,7 @@ def createNewJenkinsJob(String projectName, String destProject) {
         //gitServerHost: gitServerHost,
         //scmCredsID: scmCredsID
     ], scriptText: '''
-    multibranchPipelineJob("${projectName}/${destProject}") {
+    multibranchPipelineJob("${projectName} project/${destProject}") {
     branchSources {
         github {
             id('91179757') // IMPORTANT: use a constant and unique identifier
