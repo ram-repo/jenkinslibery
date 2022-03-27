@@ -7,6 +7,11 @@ class GithubMultibranch {
     String name
     String repositoryName
     
+    public GithubMultibranch(String projectsview, String repoName)
+    {
+     this.name = projectsview;
+     this.repositoryName = repoName;
+    }
 
     void build(DslFactory dslFactory) {
         def job = dslFactory.multibranchPipelineJob(name) {
