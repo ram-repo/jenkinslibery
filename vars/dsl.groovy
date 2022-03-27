@@ -4,7 +4,7 @@ import hudson.*
 import hudson.security.*
 import java.util.*
 
-def createNewJenkinsJob(String projectName, String destGit) {
+def createNewJenkinsJob(String projectName, String destProject) {
     jobDsl additionalParameters: [
        // projectsFolder: projectsFolder,
         projectName: projectName,
