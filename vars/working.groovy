@@ -30,7 +30,8 @@ def createNewJenkinsJob(String projectName, String destProject) {
          strategyId(1)
          }
        }
-      factory {
+    }
+    factory {
         workflowBranchProjectFactory {
             scriptPath("jenkinsFile.groovy")
         }
@@ -45,6 +46,6 @@ def createNewJenkinsJob(String projectName, String destProject) {
             numToKeep(10)
         }
     }
-    }
+}
     '''
 }
