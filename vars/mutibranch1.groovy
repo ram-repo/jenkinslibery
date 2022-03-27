@@ -14,7 +14,7 @@ pipeline {
                 definition {
                     cps {
                         script{
-                            dsl.createNewJenkinsJob("$params.projectsview", "$params.repoName")
+                            dsl.createNewJenkinsJob("demo","$params.projectsview", "$params.repoName","demo1")
                             }
                         }
                     }
