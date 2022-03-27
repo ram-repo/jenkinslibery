@@ -15,8 +15,9 @@ stages{
     stage('New MutiBranch pipline'){
         steps{
             script{
-               def multiPipeline = new GithubMultibranch("$params.projectsview", "$params.repoName").build(this)
+              // def multiPipeline = new GithubMultibranch("$params.projectsview", "$params.repoName").build(this)
                 // GithubMultibranch.GithubMultibranch("$params.projectsview", "$params.repoName").build(this)
+               new GithubMultibranch("$params.projectsview", "$params.repoName").build(this)
                 }
                }
             }
