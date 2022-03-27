@@ -23,16 +23,12 @@ def createNewJenkinsJob(String projectName, String destProject) {
             repository("${destProject}")
             includes("master feature/* bugfix/* hotfix/* release/*")
             excludes("donotbuild/*")
-            traits {
-                gitHubBranchDiscovery {
-                    strategyId(1)
-                }
-                gitHubPullRequestDiscovery {
-                    strategyId(3) // 3 = both PR head and PR merge from origin
-                }
-            }
         }
-    }
+         configure {
+         def traits = it / 'sources' / 'data' / 'jenkins.branch.BranchSource' / 'source' / 'traits'
+         traits << 'org.jenkinsci.plugins.github__branch__source.ForkPullRequestDiscoveryTrait' {
+         strategyId(1)
+         }
       factory {
         workflowBranchProjectFactory {
             scriptPath("jenkinsFile.groovy")
