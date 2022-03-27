@@ -29,6 +29,7 @@ def createNewJenkinsJob(String projectName, String destProject) {
          traits << 'org.jenkinsci.plugins.github__branch__source.ForkPullRequestDiscoveryTrait' {
          strategyId(1)
          }
+       }
       factory {
         workflowBranchProjectFactory {
             scriptPath("jenkinsFile.groovy")
