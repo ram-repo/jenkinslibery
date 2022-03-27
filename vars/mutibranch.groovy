@@ -3,7 +3,7 @@ def call() {
 properties([
     parameters([
         choice(name: 'projectsview', description: 'Please pick one', choices: ['dev', 'qa', 'test', 'prod']),
-        string(name: 'Name', description: 'Repo Name') // defaultValue: 'job-dsl-plugin'
+        string(name: 'Name', description: 'Repo Name', defaultValue: 'job-dsl-plugin')
     ])])
 
 stages{
