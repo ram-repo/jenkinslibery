@@ -11,13 +11,9 @@ pipeline {
     stages{
         stage('New MutiBranch pipline'){
             steps{
-                definition {
-                    cps {
-                        script{
-                            dsl.createNewJenkinsJob("demo","$params.projectsview", "$params.repoName","demo1")
-                            }
-                        }
-                    }
+                script{
+                    dsl.createNewJenkinsJob("demo","$params.projectsview", "$params.repoName","demo1")
+                   }
                 }
             }
         }
