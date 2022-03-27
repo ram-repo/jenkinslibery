@@ -23,6 +23,14 @@ def createNewJenkinsJob(String projectName, String destProject) {
             repository("${destProject}")
             includes("master feature/* bugfix/* hotfix/* release/*")
             excludes("donotbuild/*")
+            traits {
+                gitHubBranchDiscovery {
+                    strategyId(1)
+                }
+                gitHubPullRequestDiscovery {
+                    strategyId(3) // 3 = both PR head and PR merge from origin
+                }
+            }
         }
     }
       factory {
