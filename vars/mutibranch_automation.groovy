@@ -4,7 +4,7 @@ import hudson.plugins.git.*
 import hudson.*
 import hudson.security.*
 import java.util.*
-def call() {
+
 def createNewJenkinsJob(String projectName, String destProject) {
     jobDsl additionalParameters: [
        // projectsFolder: projectsFolder,
@@ -59,6 +59,8 @@ def createNewJenkinsJob(String projectName, String destProject) {
 }
     '''
 }
+
+def call() {
 
 properties([
     parameters([
