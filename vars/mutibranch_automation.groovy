@@ -5,7 +5,6 @@ import hudson.*
 import hudson.security.*
 import java.util.*
 
-@NonCPS
 def createNewJenkinsJob(String projectName, String destProject) {
     jobDsl additionalParameters: [
        // projectsFolder: projectsFolder,
@@ -66,7 +65,9 @@ properties([
     parameters([
         choice(name: 'projectsview', description: 'Please pick one', choices: ['dev', 'qa', 'test', 'prod']),
         string(name: 'Name', description: 'RepoName ', defaultValue: 'game-of-life')
-    ])])
+    ])
+    
+])
 
 pipeline {
     agent any
