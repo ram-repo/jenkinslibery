@@ -74,7 +74,7 @@ pipeline {
         stage('New MutiBranch pipline'){
             steps{
                 script{
-                    createNewJenkinsJob("$params.projectsview","$params.Name")
+                    createNewJenkinsJob("${projectsview}","${Name}")
                    }
                 }
             }
