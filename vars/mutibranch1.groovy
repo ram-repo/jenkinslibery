@@ -1,5 +1,3 @@
-def call() {
-
 properties([
     parameters([
         choice(name: 'projectsview', description: 'Please pick one', choices: ['dev', 'qa', 'test', 'prod']),
@@ -12,10 +10,9 @@ pipeline {
         stage('New MutiBranch pipline'){
             steps{
                 script{
-                    dsl.createNewJenkinsJob("$params.projectsview","$params.Name")
+                    workingfile.createNewJenkinsJob("$params.projectsview","$params.Name")
                    }
                 }
             }
         }
     }
-}
