@@ -5,6 +5,7 @@ import hudson.*
 import hudson.security.*
 import java.util.*
 
+@NonCPS
 def createNewJenkinsJob(String projectName, String destProject) {
     jobDsl additionalParameters: [
        // projectsFolder: projectsFolder,
@@ -60,7 +61,6 @@ def createNewJenkinsJob(String projectName, String destProject) {
     '''
 }
 
-def call() {
 
 properties([
     parameters([
@@ -80,4 +80,3 @@ pipeline {
             }
         }
     }
-}
