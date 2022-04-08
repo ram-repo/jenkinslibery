@@ -61,7 +61,7 @@ def createNewJenkinsJob(String projectName, String destProject) {
 }
 
 
-
+def call () {
 
 @NonCPS
 def setDescription() {
@@ -92,3 +92,4 @@ pipeline {
         }
     }
 }
+)
