@@ -63,7 +63,6 @@ def createNewJenkinsJob(String projectName, String destProject) {
 
 def call () {
 
-@NonCPS
 def setDescription() {
     def item = Jenkins.instance.getItemByFullName(env.JOB_NAME)
     item.setDescription('<!DOCTYPE html><html><body><p style="font-weight: bold; color: blue">==================================[Pipeline Description]=================================</p>This pipeline Creates & Delete Github repository:<ul><li>Creates MultiBranch pipeline in jenkins</li></ul><p style="font-weight: bold; color: blue">==================================[End of Description]===================================</p></body></html>')
