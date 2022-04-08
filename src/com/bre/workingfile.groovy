@@ -1,4 +1,4 @@
-package com.abc
+package com.bre
 import javaposse.jobdsl.dsl.DslFactory
 import hudson.plugins.git.*
 import hudson.*
