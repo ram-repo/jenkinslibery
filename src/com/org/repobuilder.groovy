@@ -1,3 +1,4 @@
+package com.org
 
 import hudson.plugins.git.*
 import hudson.*
