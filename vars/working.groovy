@@ -27,7 +27,9 @@ def createNewJenkinsJob(String projectName, String destProject) {
                     gitHubBranchDiscovery {
                         strategyId(1)
                     }
-                    gitHubTagDiscovery()
+                    gitHubTagDiscovery {
+                        strategyId(1)
+                    }
                 }           
             }
         }
