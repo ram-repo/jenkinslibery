@@ -28,13 +28,13 @@ def createNewJenkinsJob(String projectName, String destProject) {
          def traits = it / 'sources' / 'data' / 'jenkins.branch.BranchSource' / 'source' / 'traits'
          
          traits << 'org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait' {
-         strategyId(3)
+         strategyId(1)
          }
          traits << 'org.jenkinsci.plugins.github__branch__source.OriginPullRequestDiscoveryTrait' {
-         strategyId(1)
+         strategyId(2)
          }
          traits << 'org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait' {
-         strategyId(1)
+         strategyId(2)
          }
        }
     }
