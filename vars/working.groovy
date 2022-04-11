@@ -24,17 +24,23 @@ def createNewJenkinsJob(String projectName, String destProject) {
             includes("master feature/* bugfix/* hotfix/* release/*")
             excludes("donotbuild/*")
         }
-        configure { node ->
-    def traits = node / navigators / "org.jenkinsci.plugins.github__branch__source.GitHubSCMNavigator" / traits
-    traits << "jenkins.scm.impl.trait.RegexSCMSourceFilterTrait" {
-      regex("ha*")
+        configure {
+                def traits = it / sources / data / 'jenkins.branch.BranchSource' / source / traits
+                if (this.discoverBranches) {
+                    traits << 'org.jenkinsci.plugins.github_branch_source.BranchDiscoveryTrait' {
+                        strategyId(3) // detect all branches -refer the plugin source code for various options
+                    }
+                }
+                if (this.discoverTags) {
+                    traits << 'org.jenkinsci.plugins.github_branch_source.TagDiscoveryTrait' { }
+                }
+                if (this.includeMasterRef) {
+                        traits << 'jenkins.plugins.git.traits.RefSpecsSCMSourceTrait' {
+                       tempates(new RefSpecTemplate('+refs/heads/master:refs/remotes/@{remote}/master'))
+                    }
+
+                }
         }
-    traits << "org.jenkinsci.plugins.github_branch_source.TagDiscoveryTrait" {}
-    traits << "org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait" {
-      strategyId("3")
-        }
-    }
-    }
     factory {
         workflowBranchProjectFactory {
             scriptPath("jenkinsFile.groovy")
