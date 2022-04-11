@@ -29,6 +29,7 @@ def createNewJenkinsJob(String projectName, String destProject) {
                         strategyId(1)
                     }
         }
+        }
          configure {
          def traits = it / 'sources' / 'data' / 'jenkins.branch.BranchSource' / 'source' / 'traits'
          traits << 'org.jenkinsci.plugins.github__branch__source.ForkPullRequestDiscoveryTrait' {
