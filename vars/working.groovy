@@ -28,10 +28,6 @@ def createNewJenkinsJob(String projectName, String destProject) {
                         strategyId(1)
                     }
                     gitHubTagDiscovery()
-                    // filers heads
-                    headRegexFilter {
-                      // A Java regular expression to restrict the names.
-                      regex('(master|main|PR-.*|\\d+\\.x)')
                 }           
             }
         }
