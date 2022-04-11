@@ -38,12 +38,6 @@ def createNewJenkinsJob(String projectName, String destProject) {
                 if (this.discoverTags) {
                     traits << 'org.jenkinsci.plugins.github_branch_source.TagDiscoveryTrait' { }
                 }
-                if (this.includeMasterRef) {
-                        traits << 'jenkins.plugins.git.traits.RefSpecsSCMSourceTrait' {
-                       tempates(new RefSpecTemplate('+refs/heads/master:refs/remotes/@{remote}/master'))
-                    }
-
-                }
             }
         }
     factory {
