@@ -33,7 +33,9 @@ def createNewJenkinsJob(String projectName, String destProject) {
                  gitHubPullRequestDiscovery{
                      stragtegyId(2)
                  }
-                 gitHubTagDiscovery()
+                 gitHubTagDiscovery{
+                     stragtegyId(1)
+                 }
             }
        }
     }
