@@ -34,6 +34,7 @@ def createNewJenkinsJob(String projectName, String destProject) {
             }
             traits << 'org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait'()
           }
+       }
     }
     strategy {
         defaultBranchPropertyStrategy {
