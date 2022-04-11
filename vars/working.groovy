@@ -23,27 +23,27 @@ def createNewJenkinsJob(String projectName, String destProject) {
             repoOwner('ram-repo')
             repository("${destProject}")
             includes("master main feature/* bugfix/* hotfix/* release/*")
-            excludes("donotbuild/*")
-            traits {
+            excludes("donotbuild/*"
+        }
+         configure {
+             traits {
                     gitHubBranchDiscovery {
                         strategyId(1)
                     }
-        }
-        }
-         configure {
-         def traits = it / 'sources' / 'data' / 'jenkins.branch.BranchSource' / 'source' / 'traits'
-         traits << 'org.jenkinsci.plugins.github__branch__source.ForkPullRequestDiscoveryTrait' {
-         strategyId 1
-         }
-         traits << 'org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait' {
-         strategyId 1
-         }
-         traits << 'org.jenkinsci.plugins.github_branch_source.TagDiscoveryTrait' { 
-          null
-         }
-         traits << 'jenkins.branch.buildstrategies.basic.TagBuildStrategyImpl' {
-         strategyId 1
-         }
+            }
+        // def traits = it / 'sources' / 'data' / 'jenkins.branch.BranchSource' / 'source' / 'traits'
+        // traits << 'org.jenkinsci.plugins.github__branch__source.ForkPullRequestDiscoveryTrait' {
+        // strategyId 1
+        // }
+        // traits << 'org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait' {
+        // strategyId 1
+        // }
+        // traits << 'org.jenkinsci.plugins.github_branch_source.TagDiscoveryTrait' { 
+        // null
+        // }
+        // traits << 'jenkins.branch.buildstrategies.basic.TagBuildStrategyImpl' {
+        // strategyId 1
+        // }
        }
     }
     factory {
