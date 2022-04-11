@@ -26,17 +26,19 @@ def createNewJenkinsJob(String projectName, String destProject) {
             excludes("donotbuild/*")
         }
          configure {
-             traits {
-                 gitHubBranchDiscovery {
-                     stragtegyId(1)
-                 }
-                 gitHubPullRequestDiscovery{
-                     stragtegyId(2)
-                 }
-                 gitHubTagDiscovery{
-                     stragtegyId(1)
-                 }
-            }
+         def traits = it / 'sources' / 'data' / 'jenkins.branch.BranchSource' / 'source' / 'traits'
+         traits << 'org.jenkinsci.plugins.github__branch__source.ForkPullRequestDiscoveryTrait' {
+         strategyId 1
+         }
+         traits << 'org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait' {
+         strategyId 1
+         }
+         traits << 'org.jenkinsci.plugins.github_branch_source.TagDiscoveryTrait' { 
+          null
+         }
+         traits << 'jenkins.branch.buildstrategies.basic.TagBuildStrategyImpl' {
+         strategyId 1
+         }
        }
     }
     factory {
