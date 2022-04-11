@@ -13,7 +13,7 @@ def createNewJenkinsJob(String projectName, String destProject) {
     //gitUserUri: gitUser.replace('@', '%40'),
     //gitServerHost: gitServerHost,
     //scmCredsID: scmCredsID
-    ], scriptText: '''
+    ], scriptText: 
     multibranchPipelineJob("${projectName}") {
     branchSources {
         github {
@@ -35,7 +35,6 @@ def createNewJenkinsJob(String projectName, String destProject) {
             traits << 'org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait'()
           }
        }
-    }
     strategy {
         defaultBranchPropertyStrategy {
         }
