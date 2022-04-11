@@ -29,7 +29,7 @@ def createNewJenkinsJob(String projectName, String destProject) {
     traits << "jenkins.scm.impl.trait.RegexSCMSourceFilterTrait" {
       regex("ha*")
         }
-    traits << "org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait" {}
+    traits << "org.jenkinsci.plugins.github_branch_source.TagDiscoveryTrait" {}
     traits << "org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait" {
       strategyId("3")
         }
