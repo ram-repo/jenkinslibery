@@ -1,9 +1,10 @@
+
 import javaposse.jobdsl.dsl.DslFactory
 import hudson.plugins.git.*
 import hudson.*
 import hudson.security.*
 import java.util.*
-
+    
 def createNewJenkinsJob(String projectName, String destProject) {
     jobDsl additionalParameters: [
        // projectsFolder: projectsFolder,
@@ -13,7 +14,7 @@ def createNewJenkinsJob(String projectName, String destProject) {
         //gitUserUri: gitUser.replace('@', '%40'),
         //gitServerHost: gitServerHost,
         //scmCredsID: scmCredsID
-    ], scriptText: ''' 
+    ], scriptText: '''
     multibranchPipelineJob("${projectName}") {
     branchSources {
         github {
@@ -25,17 +26,18 @@ def createNewJenkinsJob(String projectName, String destProject) {
             excludes("donotbuild/*")
         }
          configure {
-            def traits = it / sources / data / 'jenkins.branch.BranchSource' / source / traits
-            traits << 'org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait' {
-            strategyId(1)
-            }
-            traits << 'org.jenkinsci.plugins.github__branch__source.OriginPullRequestDiscoveryTrait' {
-            strategyId(1)
-            }
-            traits << 'org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait'(){
-            TagDiscoveryTrait()
-            }
-        }
+         def traits = it / 'sources' / 'data' / 'jenkins.branch.BranchSource' / 'source' / 'traits'
+         traits << 'org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait' {
+         strategyId(1)
+         }
+         traits << 'org.jenkinsci.plugins.github__branch__source.OriginPullRequestDiscoveryTrait' {
+         strategyId(1)
+         }
+         traits << 'org.jenkinsci.plugins.github__branch__source.ForkPullRequestDiscoveryTrait' {
+         strategyId(1)
+         }
+         traits << 'org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait' {}
+       }
     }
     factory {
         workflowBranchProjectFactory {
