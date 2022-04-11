@@ -13,7 +13,7 @@ def createNewJenkinsJob(String projectName, String destProject) {
     //gitUserUri: gitUser.replace('@', '%40'),
     //gitServerHost: gitServerHost,
     //scmCredsID: scmCredsID
-    ], scriptText: '''
+    ], scriptText: 
     multibranchPipelineJob("${projectName}") {
     branchSources {
         github {
