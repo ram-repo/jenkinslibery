@@ -42,9 +42,6 @@ def createNewJenkinsJob(String projectName, String destProject) {
        }
         traits << 'jenkins.plugins.git.traits.GitLFSPullTrait' {}
         traits << 'jenkins.plugins.git.traits.CheckoutOptionTrait' {
-            extension( class: 'hudson.plugins.git.extensions.impl.CheckoutOption' ) {
-            timeout( 60 )
-        }
       }
     }
     factory {
