@@ -1,12 +1,8 @@
+import javaposse.jobdsl.dsl.DslFactory
 import hudson.plugins.git.*
 import hudson.*
 import hudson.security.*
 import java.util.*
-import groovy.transform.builder.Builder
-import groovy.transform.builder.SimpleStrategy
-import javaposse.jobdsl.dsl.DslFactory
-import javaposse.jobdsl.dsl.Job
-import javaposse.jobdsl.dsl.jobs.MultibranchWorkflowJob
 
 def createNewJenkinsJob(String projectName, String destProject) {
     jobDsl additionalParameters: [
@@ -17,7 +13,7 @@ def createNewJenkinsJob(String projectName, String destProject) {
         //gitUserUri: gitUser.replace('@', '%40'),
         //gitServerHost: gitServerHost,
         //scmCredsID: scmCredsID
-    ], scriptText: '''
+    ], scriptText: ''' 
     multibranchPipelineJob("${projectName}") {
     branchSources {
         github {
@@ -28,14 +24,17 @@ def createNewJenkinsJob(String projectName, String destProject) {
             includes("master feature/* bugfix/* hotfix/* release/*")
             excludes("donotbuild/*")
         }
-        configure {
-                def traits = it / sources / data / 'jenkins.branch.BranchSource' / source / traits
-                    traits << 'org.jenkinsci.plugins.github_branch_source.BranchDiscoveryTrait' {
-                        strategyId(3) // detect all branches -refer the plugin source code for various options
-                    }
-                    traits << 'org.jenkinsci.plugins.github_branch_source.TagDiscoveryTrait' { }
+         configure {
+            def traits = it / sources / data / 'jenkins.branch.BranchSource' / source / traits
+            traits << 'org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait' {
+            strategyId(1)
             }
+            traits << 'org.jenkinsci.plugins.github__branch__source.OriginPullRequestDiscoveryTrait' {
+            strategyId(1)
+            }
+            traits << 'org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait'()
         }
+    }
     factory {
         workflowBranchProjectFactory {
             scriptPath("jenkinsFile.groovy")
