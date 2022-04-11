@@ -32,7 +32,9 @@ def createNewJenkinsJob(String projectName, String destProject) {
             traits << 'org.jenkinsci.plugins.github__branch__source.OriginPullRequestDiscoveryTrait' {
               strategyId(1)
             }
-            traits << 'org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait'()
+            traits << 'org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait'{
+                strategyId(1)
+            }
           }
        }
     strategy {
