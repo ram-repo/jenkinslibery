@@ -22,7 +22,7 @@ def createNewJenkinsJob(String projectName, String destProject) {
             scanCredentialsId('github-ci')
             repoOwner('ram-repo')
             repository("${destProject}")
-            includes("master feature/* bugfix/* hotfix/* release/*")
+            includes("master main feature/* bugfix/* hotfix/* release/*")
             excludes("donotbuild/*")
         }
          configure {
