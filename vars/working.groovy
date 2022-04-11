@@ -44,6 +44,7 @@ def createNewJenkinsJob(String projectName, String destProject) {
           strategyId(1)
         }
     }
+    }
     factory {
         workflowBranchProjectFactory {
             scriptPath("jenkinsFile.groovy")
