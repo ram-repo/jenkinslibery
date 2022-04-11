@@ -26,23 +26,25 @@ def createNewJenkinsJob(String projectName, String destProject) {
             excludes("donotbuild/*"
         }
         configure {
-        // Re-write Git traits
-        def traits = it / sources / data / 'jenkins.branch.BranchSource' / source / traits
-        // Discover branches
-        // See: https://github.com/jenkinsci/github-branch-source-plugin/blob/master/src/main/java/org/jenkinsci/plugins/github_branch_source/BranchDiscoveryTrait.java
-        traits << 'org.jenkinsci.plugins.github_branch_source.BranchDiscoveryTrait' {
-          // Select only branches (no PRs)
-          strategyId(1)
-        }
-        // Discover tags
-        // See: https://github.com/jenkinsci/github-branch-source-plugin/blob/master/src/main/java/org/jenkinsci/plugins/github_branch_source/TagDiscoveryTrait.java
-        traits << 'org.jenkinsci.plugins.github_branch_source.TagDiscoveryTrait' { }
-        // Discover pull-requests
-        // See: https://github.com/jenkinsci/github-branch-source-plugin/blob/master/src/main/java/org/jenkinsci/plugins/github_branch_source/OriginPullRequestDiscoveryTrait.java
-        traits << 'org.jenkinsci.plugins.github_branch_source.OriginPullRequestDiscoveryTrait' {
-          // Merge automatically PRs with destination
-          strategyId(1)
-        }
+             traits {
+                    gitHubBranchDiscovery {
+                        strategyId(1)
+                    }
+            }
+        // def traits = it / 'sources' / 'data' / 'jenkins.branch.BranchSource' / 'source' / 'traits'
+        // traits << 'org.jenkinsci.plugins.github__branch__source.ForkPullRequestDiscoveryTrait' {
+        // strategyId 1
+        // }
+        // traits << 'org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait' {
+        // strategyId 1
+        // }
+        // traits << 'org.jenkinsci.plugins.github_branch_source.TagDiscoveryTrait' { 
+        // null
+        // }
+        // traits << 'jenkins.branch.buildstrategies.basic.TagBuildStrategyImpl' {
+        // strategyId 1
+        // }
+       }
     }
     }
     factory {
