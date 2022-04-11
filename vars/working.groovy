@@ -3,6 +3,7 @@ import hudson.plugins.git.*
 import hudson.*
 import hudson.security.*
 import java.util.*
+import jenkins.plugins.git.traits.*
 
 def createNewJenkinsJob(String projectName, String destProject) {
     jobDsl additionalParameters: [
