@@ -1,4 +1,3 @@
-import jenkins.plugins.git.traits.*
 import javaposse.jobdsl.dsl.DslFactory
 import hudson.plugins.git.*
 import hudson.*
@@ -37,7 +36,7 @@ def createNewJenkinsJob(String projectName, String destProject) {
          strategyId(1)
          }
          traits << 'org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait' {
-         strategyId(*)
+         strategyId(1)
          }
        }
     }
