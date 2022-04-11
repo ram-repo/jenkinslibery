@@ -23,20 +23,18 @@ def createNewJenkinsJob(String projectName, String destProject) {
             repository("${destProject}")
             includes("master main feature/* bugfix/* hotfix/* release/*")
             excludes("donotbuild/*")
+            traits {
+                    gitHubBranchDiscovery {
+                        strategyId(1)
+                    }
+                    gitHubTagDiscovery()
+                    // filers heads
+                    headRegexFilter {
+                      // A Java regular expression to restrict the names.
+                      regex('(master|main|PR-.*|\\d+\\.x)')
+                }           
+            }
         }
-         configure {
-         def traits = it / 'sources' / 'data' / 'jenkins.branch.BranchSource' / 'source' / 'traits'
-         
-         traits << 'org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait' {
-         strategyId(1)
-         }
-         traits << 'org.jenkinsci.plugins.github__branch__source.OriginPullRequestDiscoveryTrait' {
-         strategyId(2)
-         }
-         traits << 'org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait' {
-         strategyId(3)
-         }
-       }
     }
     factory {
         workflowBranchProjectFactory {
