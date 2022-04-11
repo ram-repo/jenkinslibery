@@ -30,14 +30,10 @@ def createNewJenkinsJob(String projectName, String destProject) {
         }
         configure {
                 def traits = it / sources / data / 'jenkins.branch.BranchSource' / source / traits
-                if (this.discoverBranches) {
                     traits << 'org.jenkinsci.plugins.github_branch_source.BranchDiscoveryTrait' {
                         strategyId(3) // detect all branches -refer the plugin source code for various options
                     }
-                }
-                if (this.discoverTags) {
                     traits << 'org.jenkinsci.plugins.github_branch_source.TagDiscoveryTrait' { }
-                }
             }
         }
     factory {
