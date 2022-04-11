@@ -6,14 +6,14 @@ import java.util.*
 
 def createNewJenkinsJob(String projectName, String destProject) {
     jobDsl additionalParameters: [
-       // projectsFolder: projectsFolder,
+        // projectsFolder: projectsFolder,
         projectName: projectName,
         destProject: destProject,
-        //destGit: destGit,
-        //gitUserUri: gitUser.replace('@', '%40'),
-        //gitServerHost: gitServerHost,
-        //scmCredsID: scmCredsID
-    ], scriptText: ''' 
+    //destGit: destGit,
+    //gitUserUri: gitUser.replace('@', '%40'),
+    //gitServerHost: gitServerHost,
+    //scmCredsID: scmCredsID
+    ], scriptText: '''
     multibranchPipelineJob("${projectName}") {
     branchSources {
         github {
@@ -23,25 +23,26 @@ def createNewJenkinsJob(String projectName, String destProject) {
             repository("${destProject}")
             includes("master feature/* bugfix/* hotfix/* release/*")
             excludes("donotbuild/*")
+            traits {
+                gitHubBranchDiscovery {
+                    strategyId(1)
+                    }
+                gitHubPullRequestDiscovery {
+                    strategyId(2)
+                    }
+                githubTagDiscovery()
+            }
         }
-         configure {
-            def traits = it / sources / data / 'jenkins.branch.BranchSource' / source / traits
-            traits << 'org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait' {
-            strategyId(1)
-            }
-            traits << 'org.jenkinsci.plugins.github__branch__source.OriginPullRequestDiscoveryTrait' {
-            strategyId(1)
-            }
-            traits << 'org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait'(){
-            TagDiscoveryTrait()
-            }
+    }
+    strategy {
+        defaultBranchPropertyStrategy {
         }
     }
     factory {
         workflowBranchProjectFactory {
             scriptPath("jenkinsFile.groovy")
         }
-      }
+    }
     triggers {
         periodicFolderTrigger {
             interval("2m")
@@ -52,6 +53,6 @@ def createNewJenkinsJob(String projectName, String destProject) {
             numToKeep(10)
         }
     }
-}
+    }
     '''
 }
