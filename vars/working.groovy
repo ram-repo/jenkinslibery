@@ -36,7 +36,9 @@ def createNewJenkinsJob(String projectName, String destProject) {
          traits << 'org.jenkinsci.plugins.github__branch__source.ForkPullRequestDiscoveryTrait' {
          strategyId(1)
          }
-         traits << 'org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait/'
+         // Discover tags
+        // See: https://github.com/jenkinsci/github-branch-source-plugin/blob/master/src/main/java/org/jenkinsci/plugins/github_branch_source/TagDiscoveryTrait.java
+        traits << 'org.jenkinsci.plugins.github_branch_source.TagDiscoveryTrait' { }
        }
     }
     factory {
