@@ -28,12 +28,13 @@ def createNewJenkinsJob(String projectName, String destProject) {
     def traits = node / navigators / "org.jenkinsci.plugins.github__branch__source.GitHubSCMNavigator" / traits
     traits << "jenkins.scm.impl.trait.RegexSCMSourceFilterTrait" {
       regex("ha*")
-    }
+        }
     traits << "org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait" {}
     traits << "org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait" {
       strategyId("3")
+        }
     }
- }
+    }
     factory {
         workflowBranchProjectFactory {
             scriptPath("jenkinsFile.groovy")
