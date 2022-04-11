@@ -24,22 +24,20 @@ def createNewJenkinsJob(String projectName, String destProject) {
             includes("master feature/* bugfix/* hotfix/* release/*")
             excludes("donotbuild/*")
         }
-         configure {
-         def traits = it / 'sources' / 'data' / 'jenkins.branch.BranchSource' / 'source' / 'traits'
-         traits << 'org.jenkinsci.plugins.github__branch__source.ForkPullRequestDiscoveryTrait' {
-         strategyId(1)
-         }
-         traits << 'org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait' {
-         strategyId(2)
-         }
-         traits << 'org.jenkinsci.plugins.github__branch__source.OriginPullRequestDiscoveryTrait' {
-         strategyId(1)
-         }
-         traits << 'org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait' {
-         strategyId()
-         }
-       }
+        configure {
+    def traits = it / navigators / 'org.jenkinsci.plugins.github__branch__source.GitHubSCMNavigator' / traits
+    traits << 'org.jenkinsci.plugins.github_branch_source.BranchDiscoveryTrait' {
+        strategyId 1
     }
+    traits << 'org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait' {
+        strategyId 2
+        trust(class: 'org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait$TrustEveryone')
+    }
+    traits << 'org.jenkinsci.plugins.github__branch__source.OriginPullRequestDiscoveryTrait' {
+        strategyId 2
+    }
+    }
+ }
     factory {
         workflowBranchProjectFactory {
             scriptPath("jenkinsFile.groovy")
