@@ -21,7 +21,7 @@ def createNewJenkinsJob(String projectName, String destProject) {
             scanCredentialsId('github-ci')
             repoOwner('ram-repo')
             repository("${destProject}")
-            includes("master feature/* bugfix/* hotfix/* release/*")
+            includes("master main feature/* bugfix/* hotfix/* release/*")
             excludes("donotbuild/*")
         }
          configure {
@@ -34,7 +34,7 @@ def createNewJenkinsJob(String projectName, String destProject) {
          strategyId(2)
          }
          traits << 'org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait' {
-         strategyId(2)
+         strategyId(3)
          }
        }
     }
