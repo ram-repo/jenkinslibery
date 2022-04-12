@@ -17,42 +17,31 @@ def createNewJenkinsJob(String projectName, String destProject) {
     ], scriptText: '''
     multibranchPipelineJob("${projectName}") {
     branchSources {
-        github {
+        branchSource {
+            source {
+                github {
             id('91179757') // IMPORTANT: use a constant and unique identifier
             scanCredentialsId('github-ci')
             repoOwner('ram-repo')
             repository("${destProject}")
             includes("master main feature/* bugfix/* hotfix/* release/*")
             excludes("donotbuild/*")
-            traits: [
-                gitHubBranchDiscovery(3), 
-                gitHubPullRequestDiscovery(2), 
-                gitHubForkDiscovery(strategyId: 1, trust: gitHubTrustPermissions()), 
-                gitHubTagDiscovery(3)
-            ]
-        }
-        configure {
-            def traits = it / sources / data / 'jenkins.branch.BranchSource' / source / traits
-             traits << 'org.jenkinsci.plugins.github__branch__source.ForkPullRequestDiscoveryTrait' {
-                 strategyId(1)
-                 }
-                 traits << 'org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait' {
-                 strategyId(1)
-                 }
-                 traits << 'org.jenkinsci.plugins.github__branch__source.OriginPullRequestDiscoveryTrait' {
-                 strategyId(1)
-                 }
-                 traits << 'org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait' {
-                 targets()
-                 }
-            traits << 'jenkins.plugins.git.traits.RefSpecsSCMSourceTrait' {
-              templates {
-                'jenkins.plugins.git.traits.RefSpecsSCMSourceTrait_-RefSpecTemplate' {
-                  value('+refs/heads/*:refs/remotes/@{remote}/*')
-                }
-              }
+			traits {
+                        gitHubBranchDiscovery {
+                            strategyId(1)
+                        }
+                        gitHubPullRequestDiscovery {
+                            strategyId(2)
+                        }
+                        githubTagDiscovery()
+                    }
             }
         }
+		strategy {
+                defaultBranchPropertyStrategy {
+                }
+            }
+		}
     }
     factory {
         workflowBranchProjectFactory {
