@@ -24,13 +24,13 @@ def createNewJenkinsJob(String projectName, String destProject) {
             includes("master feature/* bugfix/* hotfix/* release/*")
             excludes("donotbuild/*")
             traits {
-              "org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait": {
+              "org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait" {
                 "strategyId": 1
               },
-              "org.jenkinsci.plugins.github__branch__source.OriginPullRequestDiscoveryTrait": {
+              "org.jenkinsci.plugins.github__branch__source.OriginPullRequestDiscoveryTrait" {
                 "strategyId": 1
               },
-              "org.jenkinsci.plugins.github__branch__source.ForkPullRequestDiscoveryTrait": {
+              "org.jenkinsci.plugins.github__branch__source.ForkPullRequestDiscoveryTrait" {
                 "strategyId": 1,
                 "trust": ""
               },
