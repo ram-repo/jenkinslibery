@@ -24,7 +24,7 @@ def createNewJenkinsJob(String projectName, String destProject) {
             includes("master feature/* bugfix/* hotfix/* release/*")
             excludes("donotbuild/*")
             traits {
-              "org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait"(""),
+              "org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait"("")
               "jenkins.plugins.git.traits.RefSpecsSCMSourceTrait" {
                 templates {
                   "jenkins.plugins.git.traits.RefSpecsSCMSourceTrait_-RefSpecTemplate": {
