@@ -27,15 +27,10 @@ def createNewJenkinsJob(String projectName, String destProject) {
             includes("master main feature/* bugfix/* hotfix/* release/*")
             excludes("donotbuild/*")
 			traits {
-                        gitHubBranchDiscovery {
-                            strategyId(1)
-                        }
-                        gitHubPullRequestDiscovery {
-                            strategyId(2)
-                        }
-                        githubTagDiscovery()
-                    }
-            }
+			"org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait/",
+             		 "org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait": ""
+			 }
+		}
         }
 		strategy {
                 defaultBranchPropertyStrategy {
