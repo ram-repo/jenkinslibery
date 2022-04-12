@@ -28,8 +28,8 @@ def createNewJenkinsJob(String projectName, String destProject) {
                 gitHubBranchDiscovery(3), 
                 gitHubPullRequestDiscovery(2), 
                 gitHubForkDiscovery(strategyId: 1, trust: gitHubTrustPermissions()), 
-                //gitHubTagDiscovery(['release*']), 
-                [$class: 'gitHubTagDiscovery',  templates: [[value: 'release*']]]
+                gitHubTagDiscovery(['release*']), 
+                //[$class: 'gitHubTagDiscovery',  templates: [[value: 'release*']]]
             ]
         }
         configure {
