@@ -24,21 +24,37 @@ def createNewJenkinsJob(String projectName, String destProject) {
             repository("${destProject}")
             includes("master main feature/* bugfix/* hotfix/* release/*")
             excludes("donotbuild/*")
-            traits {
-    gitHubBranchDiscovery {
-        strategyId(1)
+            traits: [
+                gitHubBranchDiscovery(3), 
+                gitHubPullRequestDiscovery(2), 
+                gitHubForkDiscovery(strategyId: 1, trust: gitHubTrustPermissions()), 
+                gitHubTagDiscovery(['release*']) 
+                //[$class: 'gitHubTagDiscovery',  templates: [[value: 'release*']]]
+            ]
         }
-    gitHubPullRequestDiscovery {
-        strategyId(2)
-        }
-    githubTagDiscovery()
+        configure {
+            def traits = it / sources / data / 'jenkins.branch.BranchSource' / source / traits
+             traits << 'org.jenkinsci.plugins.github__branch__source.ForkPullRequestDiscoveryTrait' {
+                 strategyId(1)
+                 }
+                 traits << 'org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait' {
+                 strategyId(1)
+                 }
+                 traits << 'org.jenkinsci.plugins.github__branch__source.OriginPullRequestDiscoveryTrait' {
+                 strategyId(1)
+                 }
+                 traits << 'org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait' {
+                 targets()
+                 }
+            traits << 'jenkins.plugins.git.traits.RefSpecsSCMSourceTrait' {
+              templates {
+                'jenkins.plugins.git.traits.RefSpecsSCMSourceTrait_-RefSpecTemplate' {
+                  value('+refs/heads/*:refs/remotes/@{remote}/*')
+                }
+              }
+            }
         }
     }
-}
-strategy {
-    defaultBranchPropertyStrategy {
-    }
-}
     factory {
         workflowBranchProjectFactory {
             scriptPath("jenkinsFile.groovy")
