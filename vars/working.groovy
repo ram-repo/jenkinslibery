@@ -29,7 +29,7 @@ def createNewJenkinsJob(String projectName, String destProject) {
                 gitHubPullRequestDiscovery(2), 
                 gitHubForkDiscovery(strategyId: 1, trust: gitHubTrustPermissions()), 
                 //gitHubTagDiscovery(['release*']), 
-                [$class: 'gitHubTagDiscovery',  templates: [[value: 'release*']] 
+                [$class: 'gitHubTagDiscovery',  templates: [[value: 'release*']]]
                 [$class: 'RefSpecsSCMSourceTrait', templates: [[value: '+refs/heads/*:refs/remotes/@{remote}/*']]]
             ]
         }
