@@ -25,14 +25,7 @@ def createNewJenkinsJob(String projectName, String destProject) {
             excludes("donotbuild/*")
             traits {
               "org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait"("")
-              "jenkins.plugins.git.traits.RefSpecsSCMSourceTrait" {
-                templates {
-                  "jenkins.plugins.git.traits.RefSpecsSCMSourceTrait_-RefSpecTemplate": {
-                    value "+refs/heads/*:refs/remotes/@{remote}/*"
-                  }
-                }
               }
-            }
             }
         }
          configure {
