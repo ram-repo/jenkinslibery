@@ -23,6 +23,26 @@ def createNewJenkinsJob(String projectName, String destProject) {
             repository("${destProject}")
             includes("master feature/* bugfix/* hotfix/* release/*")
             excludes("donotbuild/*")
+            traits {
+              "org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait": {
+                "strategyId": 1
+              },
+              "org.jenkinsci.plugins.github__branch__source.OriginPullRequestDiscoveryTrait": {
+                "strategyId": 1
+              },
+              "org.jenkinsci.plugins.github__branch__source.ForkPullRequestDiscoveryTrait": {
+                "strategyId": 1,
+                "trust": ""
+              },
+              "org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait": "",
+              "jenkins.plugins.git.traits.RefSpecsSCMSourceTrait": {
+                "templates": {
+                  "jenkins.plugins.git.traits.RefSpecsSCMSourceTrait_-RefSpecTemplate": {
+                    "value": "+refs/heads/*:refs/remotes/@{remote}/*"
+                  }
+                }
+              }
+            }
         }
          configure {
          def traits = it / 'sources' / 'data' / 'jenkins.branch.BranchSource' / 'source' / 'traits'
