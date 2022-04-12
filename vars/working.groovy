@@ -38,7 +38,8 @@ def createNewJenkinsJob(String projectName, String destProject) {
          }
          // Discover tags
         // See: https://github.com/jenkinsci/github-branch-source-plugin/blob/master/src/main/java/org/jenkinsci/plugins/github_branch_source/TagDiscoveryTrait.java
-        traits << 'org.jenkinsci.plugins.github_branch_source.TagDiscoveryTrait' { }
+        traits << 'org.jenkinsci.plugins.github_branch_source.TagDiscoveryTrait/>' { }
+        //BranchSourcesContext
        }
         traits << 'jenkins.plugins.git.traits.GitLFSPullTrait' {}
         traits << 'jenkins.plugins.git.traits.CheckoutOptionTrait' {
