@@ -41,7 +41,6 @@ def createNewJenkinsJob(String projectName, String destProject) {
          }
          traits << 'org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait'("")
        }
-    }
     factory {
         workflowBranchProjectFactory {
             scriptPath("jenkinsFile.groovy")
