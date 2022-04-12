@@ -25,8 +25,19 @@ def createNewJenkinsJob(String projectName, String destProject) {
             includes("master main feature/* bugfix/* hotfix/* release/*")
             excludes("donotbuild/*")
             traits{
-            gitHubTagDiscovery{
-                targets()
+                gitHubBranchDiscovery {
+                            strategyId(1)
+                        }
+                gitHubPullRequestDiscovery {
+                            strategyId(2)
+                        }
+                githubTagDiscovery()
+                refSpecsSCMSourceTrait {
+                  templates {
+                    refSpecTemplate {
+                      value('+refs/heads/*:refs/remotes/@{remote}/*')
+                    }
+                  }
                 }
             }
         }
