@@ -1,10 +1,9 @@
-
 import javaposse.jobdsl.dsl.DslFactory
 import hudson.plugins.git.*
 import hudson.*
 import hudson.security.*
 import java.util.*
-    
+
 def createNewJenkinsJob(String projectName, String destProject) {
     jobDsl additionalParameters: [
        // projectsFolder: projectsFolder,
@@ -17,26 +16,27 @@ def createNewJenkinsJob(String projectName, String destProject) {
     ], scriptText: '''
     multibranchPipelineJob("${projectName}") {
     branchSources {
-        branchSource {
-            source {
-                github {
+        github {
             id('91179757') // IMPORTANT: use a constant and unique identifier
             scanCredentialsId('github-ci')
             repoOwner('ram-repo')
             repository("${destProject}")
-            includes("master main feature/* bugfix/* hotfix/* release/*")
+            includes("master feature/* bugfix/* hotfix/* release/*")
             excludes("donotbuild/*")
-			traits {
-			"org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait/",
-             		 "org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait": ""
-			 }
-		}
         }
-		strategy {
-                defaultBranchPropertyStrategy {
-                }
-            }
-		}
+         configure {
+         def traits = it / 'sources' / 'data' / 'jenkins.branch.BranchSource' / 'source' / 'traits'
+         traits << 'org.jenkinsci.plugins.github__branch__source.ForkPullRequestDiscoveryTrait' {
+         strategyId(1)
+         }
+         traits << 'org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait' {
+         strategyId(1)
+         }
+         traits << 'org.jenkinsci.plugins.github__branch__source.OriginPullRequestDiscoveryTrait' {
+         strategyId(1)
+         }
+         traits << 'org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait'("")
+       }
     }
     factory {
         workflowBranchProjectFactory {
