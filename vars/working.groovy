@@ -24,6 +24,11 @@ def createNewJenkinsJob(String projectName, String destProject) {
             repository("${destProject}")
             includes("master main feature/* bugfix/* hotfix/* release/*")
             excludes("donotbuild/*")
+            traits{
+                gitHubTagDiscovery{
+                    targets()
+                }
+            }
         }
         configure {
             def traits = it / sources / data / 'jenkins.branch.BranchSource' / source / traits
