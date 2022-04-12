@@ -31,7 +31,7 @@ def createNewJenkinsJob(String projectName, String destProject) {
                 gitHubPullRequestDiscovery {
                             strategyId(2)
                         }
-                githubTagDiscovery()
+                gitHubTagDiscovery()
                 refSpecsSCMSourceTrait {
                   templates {
                     refSpecTemplate {
