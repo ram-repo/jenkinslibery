@@ -24,15 +24,9 @@ def createNewJenkinsJob(String projectName, String destProject) {
             repository("${destProject}")
             includes("master main feature/* bugfix/* hotfix/* release/*")
             excludes("donotbuild/*")
-            traits {
-                gitHubBranchDiscovery {
-                    strategyId(1)
-               }
-                gitHubPullRequestDiscovery {
-                    strategyId(1)
+            traits{
+                gitHubTagDiscovery('')
                 }
-                gitHubTagDiscovery{}
-           }
         }
     }
     factory {
