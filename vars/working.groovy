@@ -58,7 +58,9 @@ def createNewJenkinsJob(String projectName, String destProject) {
     '''
 }
 
-
 def deleteJob(String jobname) {
+  if (jobsToDelete.contains(jobname)) {
+    manager.listener.logger.println(item.fullName)
     jobname.delete()
+  }
 }
