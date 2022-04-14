@@ -1,5 +1,6 @@
 import javaposse.jobdsl.dsl.DslFactory
 import hudson.plugins.git.*
+import jenkins.model.*
 import hudson.*
 import hudson.security.*
 import java.util.*
@@ -55,4 +56,9 @@ def createNewJenkinsJob(String projectName, String destProject) {
     }
 }
     '''
+}
+
+
+def deleteJob(String jobname) {
+    jobname.delete()
 }
