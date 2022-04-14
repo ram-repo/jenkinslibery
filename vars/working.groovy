@@ -64,4 +64,5 @@ def deletejob(String name){
     matchedJobs.each { job ->
         println job.name
         job.delete()
+    }
 }
