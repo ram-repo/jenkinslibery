@@ -58,9 +58,10 @@ def createNewJenkinsJob(String projectName, String destProject) {
     '''
 }
 
-def deleteJob(String jobname) {
-  if (jobsToDelete.contains(jobname)) {
-    manager.listener.logger.println(item.fullName)
-    jobname.delete()
-  }
+
+def deletejob(String name){
+    def matchedJobs = Jenkins.instance.getItem($params.Name)
+    matchedJobs.each { job ->
+        println job.name
+        job.delete()
 }
