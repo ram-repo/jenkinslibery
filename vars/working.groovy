@@ -60,7 +60,7 @@ def createNewJenkinsJob(String projectName, String destProject) {
 
 
 def deletejob(String name){
-    def matchedJobs = Jenkins.instance.getItem(name)
+    def matchedJobs = Jenkins.instance.getItemByFullName(name)
     matchedJobs.each { job ->
         println job.name
         job.delete()
