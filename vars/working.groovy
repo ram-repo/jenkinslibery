@@ -1,7 +1,7 @@
 import javaposse.jobdsl.dsl.DslFactory
 import hudson.plugins.git.*
-import jenkins.model.*
 import hudson.*
+import jenkins.model.*
 import hudson.security.*
 import java.util.*
 
